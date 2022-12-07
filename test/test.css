@@ -1,0 +1,154 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: white;
+}
+
+.base2 {
+  width: 100%;
+  height: 400px;
+  background: lightcyan;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container2:hover .card {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.container2 {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+.card {
+  height: 350px;
+  width: 350px;
+  position: relative;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.card .front, .card .back, .card .pic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 500px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  font-size: 3em;
+}
+
+.card .front {
+  color: white;
+  background-color: black;
+  z-index: 2;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.card .back {
+  background-color: white;
+  border-color: #44abff;
+  border-style: solid;
+  border-width: medium;
+  z-index: 1;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.base3 {
+  width: 100%;
+  height: 400px;
+  background: lightcyan;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card2.is-flipped {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.container3 {
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+.card2 {
+  height: 350px;
+  width: 350px;
+  position: relative;
+  -webkit-transition: all 1s linear;
+  transition: all 1s linear;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.card2 .front2, .card2 .back2, .card2 .pic2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 500px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  font-size: 3em;
+}
+
+.card2 .front2 {
+  color: white;
+  background-color: black;
+  z-index: 2;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.card2 .back2 {
+  background-color: white;
+  border-color: #44abff;
+  border-style: solid;
+  border-width: medium;
+  z-index: 1;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+/*# sourceMappingURL=test.css.map */
