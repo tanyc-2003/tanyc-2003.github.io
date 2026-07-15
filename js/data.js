@@ -1,9 +1,9 @@
 /* Site content. Everything the pages render comes from here — edit this file
    to add a project or change copy; no template edits needed.
 
-   Each project's `media` describes the placeholder panel shown until a real
-   photo exists. Set `image` to a path under images/ and it replaces the
-   gradient placeholder everywhere that project appears. */
+   Projects show a gradient placeholder panel until a real photo exists. Set
+   `image` to a committed image path and it replaces that placeholder
+   everywhere the project appears. */
 
 const NAV = [
   { key: 'home', label: 'Home', href: '#/' },
