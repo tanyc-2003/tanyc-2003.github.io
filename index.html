@@ -1,117 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Tan Yi Cherng">
-    <title>YC's Portfolio</title>
-    <link rel="stylesheet" href="../css/main.css">
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tan Yi Cherng — EEE graduate · maker · engineer</title>
+<meta name="description" content="I design, build and document hands-on engineering projects, from robotics to hardware and AI — each with a full step-by-step build guide.">
+<meta name="author" content="Tan Yi Cherng">
+<meta name="theme-color" content="#ebebeb">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tan Yi Cherng — EEE graduate · maker · engineer">
+<meta property="og:description" content="Walking robots, solar-measurement hardware and agentic AI pipelines — each with a full step-by-step build guide.">
+<meta property="og:url" content="https://tanyc-2003.github.io/">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232e80ff'/><stop offset='1' stop-color='%23f65bf9'/></linearGradient></defs><rect width='40' height='40' rx='13' fill='url(%23g)'/><text x='20' y='27' font-family='sans-serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'>YC</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <section class="hero">
-        <div class="hero-frame">
-            <!-- <img class=frame src="../images/hero_background-02-frame.png" alt=" "> -->
-        </div>
-        <nav>
-            <div class="logo">
-                <a href="index.html"><img class="logo-mobile" src="../images/YC_logo.svg" alt="logo"></a>
-                <a href="index.html"><img class="logo-desktop" src="../images/YC_logo_desktop.svg" alt="logo"></a>
-            </div>
+<div class="page">
 
-            <img class="menu-btn" aria-controls="navigation-menu" aria-expanded="false" class="sr-only" src="../images/nav_sc2.svg" alt="Open menu">
-            
-            <div id=="navigation-menu" class="nav-menu" data-visible="false">
-                <img class="menu-exit-btn" src="../images/exit_nav.svg" alt="Close">
-                <ul class="nav-list">
-                    <li><a class="home nav-items" aria-hidden="true" href="index.html">Home</a></li>
-                    <li><a class="nav-items" aria-hidden="true" href="underConstruction.html">Projects</a></li>
-                    <li><a class="nav-items" aria-hidden="true" href="underConstruction.html">About</a></li>
-                    <li><a class="nav-items" aria-hidden="true" href="underConstruction.html">Resume</a></li>
-                    <li><a class="nav-items" aria-hidden="true" href="underConstruction.html">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
+  <nav class="nav no-print">
+    <a class="brand" href="#/" aria-label="Home">
+      <span class="brand__mark">YC</span>
+      <span class="brand__name">Tan Yi Cherng</span>
+    </a>
+    <div class="nav__links" id="navLinks"></div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-        <div class="container">
-            <div class="container-welcome">
-                <p class="intro1">Hey, Welcome !</p>
-                <p class="intro2">I'm <span>YC</span></p>
-                <p class="intro3">Only works upto 1366px screen width :p</p>
-                <!-- <p class="welcome">Welcome to my <span>website !</span></p>
-                <p class="intro">I am <span>Tan Yi Cherng</span> and this is my portfolio website.</p> -->
-                
-                <div class="about-drop">
-                    <div class="about-container">
-                        <p class="about-text">About</p>
-                        <svg id="Layer_5" class="drop-icon" data-name="Layer 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34.47 24.59"><path class="cls-1" d="M734.2,324.74h-4.07a1,1,0,0,0-.89.51l-10.55,18.51a1.16,1.16,0,0,1-.48.45l-.67.23-.67-.23a1.13,1.13,0,0,1-.47-.45l-10.56-18.51a1,1,0,0,0-.88-.51h-4.07a.58.58,0,0,0-.5.87l12,20.84a6.16,6.16,0,0,0,5.16,2.88,6.49,6.49,0,0,0,5.17-2.88l12-20.84A.58.58,0,0,0,734.2,324.74Z" transform="translate(-700.31 -324.74)"/></svg>
-                    </div>
-                    <div class="drop-content-container">
-                        <div class="contents">
-                            <p class="content0">Hi, my name is <span>Tan Yi Cherng</span>.</p>
-                            <p class="content1">I am an engineering student in the disipline of <span>Electrical and Electronics Engineering</span>.</p>
-                            <p class="content2">Being a technology enthusiast: I loves designing, creating and producing digital and hands-on projects!</p>
-                            <p class="content3"><a href="underConstruction.html" class="to-more">more</a> about me</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-empty"></div>
-            <div class="container-pfp">
-                <img class="pfp-1" src="../images/profile_pic.jpg" alt="Picture of me">
-            </div> 
-            <div class="about-link">
-                <div class="about-container">
-                    <a href="underConstruction.html" class="to-about">About</a>
-                </div>
-            </div>
-        </div>
-        <div class="container-2">
-            <div class="pfp-bg">
-                <img class="pfp-2" src="../images/profile_pic_2.png" alt="Picture of me">
-            </div>
-        </div>
-        <div class="socialmedia-container">
-            <div class="socialmedia-link">
-            </div>
-        </div>
-    </section>
+  <div class="no-print">
+    <div class="drawer-scrim" id="drawerScrim"></div>
+    <aside class="drawer" id="drawer" aria-label="Menu">
+      <button class="drawer__close" id="drawerClose" aria-label="Close menu">✕</button>
+      <div class="drawer__links" id="drawerLinks"></div>
+    </aside>
+  </div>
 
-    <section class="project-showcase">
-        <h2>Project Showcase</h2> 
-        <div class="showcase-container">
-            <div class="showcase-frame">
-                <div class="swiper mySwiper">
-                    <div class="shadow"></div>
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">.</div>
-                        <div class="swiper-slide"></div>
-                        <div class="swiper-slide"></div>
-                        <div class="swiper-slide"></div>
-                        <div class="swiper-slide"></div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>    
-                </div>
-            </div>
+  <main id="app"></main>
+
+  <footer class="footer no-print">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__mark">YC</span>
+        <div>
+          <div class="footer__name">Tan Yi Cherng</div>
+          <div class="footer__tagline">EEE graduate · maker · engineer</div>
         </div>
-    </section>
+      </div>
+      <div class="footer__links">
+        <a href="https://github.com/tanyc-2003" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/yi-cherng-tan/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:tanyicherng99@gmail.com">Email</a>
+      </div>
+      <div class="footer__copy">© 2026 YC</div>
+    </div>
+  </footer>
 
-    <section class="skill-sets">
-        <h2>Skill Sets</h2>
-        <div class="skillset-container"></div>
-    </section>
- 
-    <footer class="footer">
-        <p class="copyright">Copyright 2021 YC</p>
-    </footer>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="../js/main.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
 </body>
-
 </html>
