@@ -15,7 +15,6 @@ index.html      page shell — nav, mobile drawer, footer
 css/style.css   design tokens + every component style
 js/data.js      all site content (projects, skills, about, résumé, contact)
 js/app.js       hash router + view templates
-images/         image assets
 ```
 
 ## Routing
@@ -43,9 +42,10 @@ Detail sections appear only when they have content: a project with an empty
 has no command table, and a null `diagramLabel` has no wiring section.
 
 **Add a photo:** project panels currently show striped gradient placeholders
-with `// drop: ...` hints, as in the design. Set a project's `image` to a path
-(e.g. `'images/quadruped.jpg'`) and the photo replaces the placeholder on the
-home card, projects grid and detail hero.
+with `// drop: ...` hints, as in the design. Commit the image anywhere in the
+repo and set that project's `image` to its path (e.g. `'img/quadruped.jpg'`) —
+the photo then replaces the placeholder on the home card, projects grid and
+detail hero.
 
 ## Local preview
 
