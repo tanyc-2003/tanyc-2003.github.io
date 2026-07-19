@@ -425,12 +425,34 @@ const PROJECTS = [
   }
 ];
 
+// Home-page "Skills & tools", grouped by domain rather than by tool type —
+// the résumé groups the same ground by category instead. Keep these honest:
+// every entry should be traceable to a project or a role on this site.
 const SKILLS = [
-  { title: 'Robotics', items: ['Servo control', 'Kinematics', 'CAD', 'PCA9685'] },
-  { title: 'Embedded / firmware', items: ['C / C++', 'Arduino', 'Sensors', 'Serial / BT'] },
-  { title: 'Hardware / electronics', items: ['Power electronics', 'Ćuk converter', 'Sensing', 'PCB'] },
-  { title: 'Signal processing / AI', items: ['I–V analysis', 'LangGraph', 'RAG', 'LLM pipelines'] },
-  { title: 'Web / software', items: ['Python', 'JavaScript', 'HTML / CSS', 'Cloud dashboards'] }
+  {
+    title: 'Robotics & mechatronics',
+    items: ['Servo control', 'Kinematics', 'PCA9685', 'SolidWorks CAD', '3D printing', 'Laser cutting']
+  },
+  {
+    title: 'Embedded / firmware',
+    items: ['C / C++', 'Arduino', 'ESP32', 'Raspberry Pi', 'FreeRTOS', 'Sensors', 'Serial / Bluetooth']
+  },
+  {
+    title: 'Hardware / electronics',
+    items: ['Power electronics', 'Ćuk converter', 'PCB design', 'Circuit design', 'EAGLE CAD', 'Sensing']
+  },
+  {
+    title: 'IC & digital design',
+    items: ['Digital IC design', 'VLSI', 'Layout design', 'SystemVerilog', 'FPGA', 'ModelSim']
+  },
+  {
+    title: 'Signal processing & ML',
+    items: ['EMG / biosignals', 'Feature extraction', 'SVM · kNN · DNN', 'MATLAB / Simulink', 'I–V analysis']
+  },
+  {
+    title: 'Software, web & data',
+    items: ['Python', 'JavaScript', 'HTML / CSS', 'Flask', 'React', 'LangGraph', 'RAG / LLM pipelines', 'DuckDB', 'Firebase']
+  }
 ];
 
 const ABOUT = {
