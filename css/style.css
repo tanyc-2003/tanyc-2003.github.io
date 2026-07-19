@@ -876,6 +876,11 @@ button { font-family: inherit; }
   box-shadow: 0 5px 14px rgba(46, 128, 255, 0.28);
 }
 
+/* min-width:0 lets the text column shrink below its longest word; without it
+   a long path like Recycle_Bot_code/Recycle_Bot_code.ino sets the floor and
+   pushes the step past the viewport. break-word then wraps the token itself. */
+.step__text { min-width: 0; overflow-wrap: break-word; }
+
 .step h3 { font-size: 18px; font-weight: 600; margin: 2px 0 6px; }
 .step p { font-size: 15px; line-height: 1.65; color: var(--ink-softer); margin: 0; }
 

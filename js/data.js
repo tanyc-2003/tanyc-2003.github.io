@@ -3,7 +3,10 @@
 
    Projects show a gradient placeholder panel until a real photo exists. Set
    `image` to a committed image path and it replaces that placeholder
-   everywhere the project appears. */
+   everywhere the project appears.
+
+   `featured: true` puts a project on the home page as a large alternating
+   card. Every project appears on the Projects page regardless. */
 
 const NAV = [
   { key: 'home', label: 'Home', href: '#/' },
@@ -17,6 +20,7 @@ const PROJECTS = [
   {
     id: 'quadruped',
     num: '01',
+    featured: true,
     cat: 'Robotics · Embedded',
     title: 'Quadruped Walking Robot',
     subtitle: 'A Bluetooth-controlled, eight-servo walking robot built for the UoSM Robotics Club workshop.',
@@ -68,6 +72,7 @@ const PROJECTS = [
   {
     id: 'ivtracer',
     num: '02',
+    featured: true,
     cat: 'Power Electronics · IoT',
     title: 'Low-Cost I–V Curve Tracer',
     subtitle: 'A portable, internet-enabled I–V curve tracer for solar PV modules, built around a Ćuk-converter electronic load.',
@@ -118,6 +123,7 @@ const PROJECTS = [
   {
     id: 'llmagent',
     num: '03',
+    featured: true,
     cat: 'AI · Software',
     title: 'Java → C++ Transpilation Agent',
     cardTitle: 'Java → C++ Agent',
@@ -165,6 +171,256 @@ const PROJECTS = [
     results: 'Point it at a Java codebase and it emits a compilable, tested C++17 project — with frozen header contracts, ODR checks, a cost ledger and a full run report. Fully resumable across sessions.',
     downloads: [
       { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/Agentic-LLM-Transpilation-Pipeline-for-Java-to-Cpp-' }
+    ]
+  },
+  {
+    id: 'emgband',
+    num: '04',
+    cat: 'Wearables · Machine Learning',
+    title: 'Finger Gesture Recognition Wristband',
+    cardTitle: 'EMG Gesture Wristband',
+    subtitle: 'A low-cost, 3-channel EMG wristband that classifies finger gestures from signals read at the wrist rather than the forearm.',
+    cardDesc: 'A low-cost, 3-channel EMG wristband that classifies finger gestures from signals read at the wrist rather than the forearm.',
+    gridDesc: 'Final-year project: a £150 3-channel sEMG wristband classifying finger gestures.',
+    tags: ['EMG', 'MATLAB', 'ESP32', 'Machine learning'],
+    cardTags: ['EMG', 'MATLAB', 'ESP32'],
+    grad: 'linear-gradient(135deg,#2e80ff 0%,#7b5cff 100%)',
+    cardGrad: 'linear-gradient(135deg,#2e80ff,#7b5cff)',
+    word: 'EMG',
+    gridWord: 'EMG Band',
+    monoWord: false,
+    heroHint: '// drop: wristband on wrist + gesture set',
+    cardHint: '// drop: wristband photo',
+    image: null,
+    repo: 'https://github.com/tanyc-2003/Low-Cost-Wearable-User-Independent-Finger-Gesture-Recognition-Wristband',
+    overviewParas: [
+      'My final-year MEng project at the University of Southampton (2024/25), supervised by Prof. Chris Freeman. Commercial EMG gesture armbands are expensive, use four or more sensors, and sit on the forearm — this asks whether a cheaper, smaller wristband can do the same job.',
+      'The prototype reads surface EMG from three dry electrodes at the wrist, closer to the tendons than the muscle bellies, on an ESP32 and within a £150 budget. Signals are windowed, feature-extracted (MODWT energy and standard deviation, MAV, variance, kurtosis, skewness) and classified with kNN, SVM, LDA and a deep neural network in MATLAB.',
+      'The interesting question is user independence: whether a model trained on one set of people generalises to someone it has never seen.'
+    ],
+    prereqGroups: [
+      { label: 'Hardware', items: ['ESP32-DevKitC V4 (3 × 12-bit ADC)', '3 × DFRobot SEN0240 dry sEMG sensors', 'Adafruit USB isolator', 'Wristband housing'] },
+      { label: 'Software', items: ['Arduino IDE', 'Python 3 (serial capture)', 'MATLAB + Statistics & ML Toolbox'] }
+    ],
+    steps: [
+      { title: 'Place the electrodes', body: 'Fit the three dry electrodes around the wrist — two anterior, one posterior — and connect the USB isolator between the board and the PC to cut mains noise.' },
+      { title: 'Acquire', body: 'Flash the firmware from ARDUINO/EMGRecorder_multi_sensor to sample all three channels at 500 Hz and stream them over UART.' },
+      { title: 'Record', body: 'Run the Python capture scripts to read the serial stream, cut it into 0.5 s windows with 20% overlap, and save per-gesture .mat files.' },
+      { title: 'Extract & train', body: 'In MATLAB, extract the MODWT, time-domain and statistical features, then train kNN, SVM, LDA and DNN classifiers under 5×2 cross-validation.' },
+      { title: 'Predict live', body: 'Load the trained SVM in MATLAB/Real Time/realTimeSVMprediction.m to classify gestures live from the wristband over UART.' }
+    ],
+    codeBlocks: [],
+    commands: [],
+    diagramTitle: 'Signal chain',
+    diagramLabel: '// signal chain: 3× dry sEMG → ESP32 ADC @500Hz → UART → windowing → features → classifier',
+    results: 'On four gestures the wristband reached 99.35% accuracy for a single known user (linear SVM), but 69.38% user-independent (RBF SVM) — the generalisation gap is the real finding. Dry metallic electrodes beat the wet MyoWare 2.0 sensor, wrist acquisition matched forearm accuracy, and a 0.5 s window gave the best latency/accuracy trade-off. Stretching to seven gestures dropped accuracy to 75.14% individual and 44.03% user-independent.',
+    downloads: [
+      { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/Low-Cost-Wearable-User-Independent-Finger-Gesture-Recognition-Wristband' },
+      { label: 'Full project report (PDF)', url: 'https://github.com/tanyc-2003/Low-Cost-Wearable-User-Independent-Finger-Gesture-Recognition-Wristband/blob/main/Full_report.pdf' }
+    ]
+  },
+  {
+    id: 'argus',
+    num: '05',
+    cat: 'Data Engineering · Python',
+    title: 'ARGUS — Point-in-Time Market Data',
+    cardTitle: 'ARGUS Data Platform',
+    subtitle: 'A minimum-cost, point-in-time-correct market-data platform built entirely on free sources.',
+    cardDesc: 'A point-in-time-correct market data pipeline on free sources — cross-source voting, bitemporal history and sealed nightly snapshots.',
+    gridDesc: 'Point-in-time-correct market data pipeline built entirely on free sources.',
+    tags: ['Python', 'DuckDB', 'Parquet', 'Data pipeline'],
+    cardTags: ['Python', 'DuckDB', 'Parquet'],
+    grad: 'linear-gradient(135deg,#2e80ff 0%,#f65bf9 100%)',
+    cardGrad: 'linear-gradient(135deg,#2e80ff,#f65bf9)',
+    word: 'ARGUS',
+    gridWord: 'ARGUS',
+    monoWord: false,
+    heroHint: '// drop: pipeline diagram or gap-ledger screenshot',
+    cardHint: '// drop: pipeline diagram',
+    image: null,
+    repo: 'https://github.com/tanyc-2003/ARGUS',
+    overviewParas: [
+      'ARGUS captures US equity market data from free sources, reconciles it across providers, adjusts it for corporate actions without look-ahead, and publishes a sealed, contract-checked DuckDB database any downstream tool can read.',
+      'The design goal is honesty about data quality. Every daily bar is voted on across yfinance, Alpaca IEX and Stooq, then graded good, degraded or quarantined — conflicting bars are never served. A published gap ledger states exactly what free data cannot buy, with a severity per gap, rather than papering over the holes.',
+      'Point-in-time correctness is the core guarantee: a value served for a past date can never change because of a later split or dividend, and the system can explain any value factor by factor.'
+    ],
+    prereqGroups: [
+      { label: 'Requirements', items: ['Python 3.11+ (developed against 3.14)', 'A local disk outside any cloud-sync folder', 'Free API keys — blank keys skip a job rather than fail it'] }
+    ],
+    steps: [
+      { title: 'Configure', body: 'Copy .env.example to .env and fill in whatever free API keys you have; a blank key makes that job skip instead of failing.' },
+      { title: 'Set up', body: 'Run scripts/setup_argus.bat with a data root. It creates the venv, installs the package and initialises the database — and refuses a OneDrive or Dropbox path, since Parquet and DuckDB under a sync client risk corruption.' },
+      { title: 'Choose the universe', body: 'Edit config/universe.yaml — the daily spine, shipping with 10 macro ETFs and 102 S&P 100 constituents. Adding a ticker triggers a one-off deep backfill on the next run.' },
+      { title: 'Run nightly', body: 'Register the scheduled task, or run argus nightly by hand: calendar gate, capture, build, vote, publish — idempotent per trade date.' },
+      { title: 'Read the data', body: 'Point a read-only DuckDB connection at argus_serving.duckdb and query the frozen published views.' }
+    ],
+    codeBlocks: [
+      {
+        label: 'Set up (Windows)',
+        code: 'copy .env.example .env          # blank keys mean a job SKIPS, not fails\n\n.\\scripts\\setup_argus.bat D:\\argus-data\n\n.\\scripts\\register_scheduled_tasks.ps1 ^\n  -ArgusExe D:\\argus-data\\venv\\Scripts\\argus.exe'
+      },
+      {
+        label: 'Read the sealed serving database',
+        code: 'import duckdb\n\ncon = duckdb.connect("D:/argus-data/argus_serving.duckdb", read_only=True)\n\ncon.execute("""\n    SELECT * FROM vw_mad_daily_ohlcv\n    WHERE ticker = \'AAPL\'\n    ORDER BY effective_date\n""").pl()\n\n# what the free data cannot buy\ncon.execute("SELECT gap_key, metric, severity FROM gap_ledger").pl()'
+      },
+      {
+        label: 'CLI',
+        code: 'argus check       # env sanity: data root, keys, latest session\nargus nightly     # capture -> build -> vote -> publish (idempotent)\nargus rebuild --yes                # replay deterministically from L2\nargus verify-pit --ticker AAPL --date 2020-08-28   # full audit trail'
+      }
+    ],
+    commands: [],
+    diagramTitle: 'Architecture',
+    diagramLabel: '// free sources → L0 landing (append-only) → L2 events (system of record) → vote + SCD-2 → canonical DuckDB → PIT serving views → contract gate → argus_serving.duckdb',
+    results: 'The published tables form a frozen, additive-only contract, schema-checked in CI and again inside the nightly publish, so a regression fails inside ARGUS and can never reach a consumer. The DuckDB build file is disposable — argus rebuild deterministically regenerates it by replaying the event store.',
+    downloads: [
+      { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/ARGUS' },
+      { label: 'Architecture & serving contract docs', url: 'https://github.com/tanyc-2003/ARGUS/tree/main/docs' }
+    ]
+  },
+  {
+    id: 'advisory',
+    num: '06',
+    cat: 'Quantitative · Data Science',
+    title: 'Market Advisory Dashboard',
+    subtitle: 'A statistically-disciplined market-intelligence dashboard where no output is shown until it passes a validation gate.',
+    cardDesc: 'A market-intelligence dashboard with regime detection, historical analogs and tail-aware sizing — every output gated behind statistical validation.',
+    gridDesc: 'Regime detection, historical analogs and tail-aware sizing, all gated behind validation.',
+    tags: ['Python', 'React', 'DuckDB', 'Statistics'],
+    cardTags: ['Python', 'React', 'Statistics'],
+    grad: 'linear-gradient(135deg,#8a5cff 0%,#f65bf9 100%)',
+    cardGrad: 'linear-gradient(135deg,#8a5cff,#f65bf9)',
+    word: 'Signal',
+    gridWord: 'Advisory',
+    monoWord: false,
+    heroHint: '// drop: dashboard screenshot',
+    cardHint: '// drop: dashboard screenshot',
+    image: null,
+    repo: 'https://github.com/tanyc-2003/Market-Advisory-Dashboard',
+    overviewParas: [
+      'A local-first dashboard that turns market data into honest evidence about evidence. It reports where the market is now via a Winsorised Hidden Markov Model, what history says through a Mahalanobis analog engine, what is driving each name via interventional SHAP attribution, and what you would be sizing into with tail-aware Kelly diagnostics.',
+      'One rule governs everything: no layer’s result counts as evidence until the validation layer has signed it off. The dashboard refuses to render an output without a passing report, and a positive walk-forward Sharpe is not enough on its own — the Deflated Sharpe Ratio applies a trial-count penalty drawn from a monotonic audit log, so nobody can pretend they ran fewer experiments than they did.',
+      'It deliberately does not execute trades, recommend position sizes, or generate deterministic buy/sell signals. Those restrictions are architectural rather than cultural — the system is built to make over-confidence harder, not to make decisions.'
+    ],
+    prereqGroups: [
+      { label: 'Requirements', items: ['Python 3.11+ (developed against 3.14)', 'Node 18+ for the React frontend', 'No API key needed — free yfinance, FRED and CBOE data'] }
+    ],
+    steps: [
+      { title: 'Install', body: 'Create a virtual environment and install the package with its dev extras.' },
+      { title: 'Bootstrap the databases', body: 'Run scripts/bootstrap_db.py to create main.duckdb and audit.duckdb.' },
+      { title: 'Seed data', body: 'Choose one path — a deterministic synthetic universe needing no network, or real OHLCV and macro data from yfinance and FRED.' },
+      { title: 'Validate', body: 'Run scripts/run_validation.py to populate the validation reports. Until you do, every layer shows no_report and the UI stays gated — that is the intended default.' },
+      { title: 'Launch a UI', body: 'Start the FastAPI backend and the React frontend, or fall back to the legacy Streamlit app over the same backend.' }
+    ],
+    codeBlocks: [
+      {
+        label: 'Set up',
+        code: 'py -3.14 -m venv .venv\n.\\.venv\\Scripts\\activate\n\npip install -e ".[dev]"\ncp .env.example .env\n\npython scripts/bootstrap_db.py     # main.duckdb + audit.duckdb\npython scripts/ingest_real_data.py # or seed_synthetic_data.py\npython scripts/run_validation.py   # REQUIRED before the UI ungates'
+      },
+      {
+        label: 'Run the React app',
+        code: 'pip install -e ".[api]"\npython scripts/run_api.py          # FastAPI on :8000\n\n# second terminal\ncd frontend && npm install && npm run dev   # Vite on :5173'
+      }
+    ],
+    commands: [],
+    diagramTitle: 'Architecture',
+    diagramLabel: '// every layer output → Layer 0 validation gate (walk-forward + Deflated Sharpe vs trial log) → rendered, or withheld as no_report',
+    results: 'Six views — Overview, Track record, Portfolio, Journal, Calibration and Validation — load from a single API round trip. The system grades its own calls against realised forward returns, monitors input freshness per feed, and keeps a decision change-log with rationale. A second probabilistic forecaster is wired in but stays hidden because it has not passed the gate.',
+    downloads: [
+      { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/Market-Advisory-Dashboard' },
+      { label: 'Documentation', url: 'https://github.com/tanyc-2003/Market-Advisory-Dashboard/tree/main/docs' }
+    ]
+  },
+  // NOTE: the Team-C-Smart-Meter-Web repo has a Firebase service-account
+  // private key committed at its root. Revoke and rotate the key, then purge
+  // it from that repo's history — deleting the file alone does not revoke it.
+  {
+    id: 'smartmeter',
+    num: '07',
+    cat: 'Web · IoT',
+    title: 'Smart Meter Dashboard & Chatbot',
+    subtitle: 'A Flask web app for monitoring and controlling a smart meter, with a conversational assistant over the readings.',
+    cardDesc: 'A Flask web app for monitoring and controlling a smart meter, with a conversational assistant over the live readings.',
+    gridDesc: 'Team web app for smart-meter control, with Firebase storage and a chatbot.',
+    tags: ['Flask', 'Firebase', 'OpenAI', 'Team project'],
+    cardTags: ['Flask', 'Firebase', 'OpenAI'],
+    grad: 'linear-gradient(135deg,#2e80ff 0%,#7b5cff 100%)',
+    cardGrad: 'linear-gradient(135deg,#2e80ff,#7b5cff)',
+    word: 'Meter',
+    gridWord: 'Smart Meter',
+    monoWord: false,
+    heroHint: '// drop: dashboard screenshot',
+    cardHint: '// drop: dashboard screenshot',
+    image: null,
+    repo: 'https://github.com/tanyc-2003/Team-C-Smart-Meter-Web',
+    overviewParas: [
+      'A team web interface for a smart electricity meter, built as the Team C group project. The Flask backend serves a browser dashboard, persists meter readings to Firebase Firestore, and exposes a JSON API the front end polls for live values.',
+      'Alongside the readings sits a chatbot layer wired to the OpenAI API, so the meter data can be asked about in plain language rather than only read off a chart.'
+    ],
+    prereqGroups: [
+      { label: 'Requirements', items: ['Python 3 with the requirements.txt dependencies', 'A Firebase project with Firestore enabled', 'Service-account credentials, supplied via environment', 'An OpenAI API key in .env'] }
+    ],
+    steps: [
+      { title: 'Install', body: 'Install the Python dependencies, or run install_win.bat on Windows.' },
+      { title: 'Connect Firebase', body: 'Point the Firebase Admin SDK at your own service-account credentials and enable the Smart-Meter-Data Firestore collection.' },
+      { title: 'Add the API key', body: 'Put your OpenAI key in .env as OPENAI_API_KEY — the app loads it at start-up for the chatbot.' },
+      { title: 'Run the server', body: 'Start app.py (or run_win.bat) and open the dashboard in a browser; a procfile and runtime.txt are included for hosted deployment.' }
+    ],
+    codeBlocks: [
+      {
+        label: 'Run locally',
+        code: 'pip install -r requirements.txt\n\n# supply your own Firebase credentials and OpenAI key\necho "OPENAI_API_KEY=sk-..." > .env\n\npython app.py       # or: run_win.bat'
+      }
+    ],
+    commands: [],
+    diagramTitle: 'Architecture',
+    diagramLabel: '// smart meter → Flask API → Firebase Firestore → browser dashboard + OpenAI chatbot',
+    results: 'The dashboard renders live meter readings from Firestore and answers plain-language questions about them through the chatbot, with the Flask app packaged for hosted deployment.',
+    downloads: [
+      { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/Team-C-Smart-Meter-Web' }
+    ]
+  },
+  {
+    id: 'dustbin',
+    num: '08',
+    cat: 'Robotics · Workshop',
+    title: 'Smart Recycling Dustbin',
+    subtitle: 'An automatic dustbin built from recycled materials for the UoSM Robotics Club recycling workshop.',
+    cardDesc: 'An automatic dustbin built from recycled materials for the UoSM Robotics Club recycling campaign workshop.',
+    gridDesc: 'Ultrasonic-triggered automatic bin lid, built from recycled materials for a club workshop.',
+    tags: ['Arduino', 'HC-SR04', 'Servo', 'Workshop'],
+    cardTags: ['Arduino', 'HC-SR04', 'Servo'],
+    grad: 'linear-gradient(135deg,#2e80ff 0%,#f65bf9 100%)',
+    cardGrad: 'linear-gradient(135deg,#2e80ff,#f65bf9)',
+    word: 'Bin',
+    gridWord: 'Smart Bin',
+    monoWord: false,
+    heroHint: '// drop: finished dustbin photo',
+    cardHint: '// drop: dustbin photo',
+    image: null,
+    repo: 'https://github.com/tanyc-2003/UoSM-Robotics-Club-Smart-Dustbin-24-25',
+    overviewParas: [
+      'A UoSM Robotics Club workshop run in 2024/25 with the Students’ Association to promote the recycling campaign. An ultrasonic sensor detects a nearby hand and a servo lifts the lid, so nobody has to touch the bin.',
+      'The build is deliberately simple and cheap: the body and lid are made from recycled materials, and the electronics are an Arduino, one sensor and one servo — enough for a beginner-friendly session with a working robot at the end.'
+    ],
+    prereqGroups: [
+      { label: 'Hardware', items: ['Arduino Uno / Maker Uno', 'SG90 servo motor', 'HC-SR04 ultrasonic sensor', 'Breadboard and jumper wires', 'Recycled materials for the body and lid'] },
+      { label: 'Software', items: ['Arduino IDE', 'Servo library'] }
+    ],
+    steps: [
+      { title: 'Build the body', body: 'Assemble the dustbin structure from recycled material and mount the electronics on it.' },
+      { title: 'Power the breadboard', body: 'Connect the breadboard power rails to 5V and GND.' },
+      { title: 'Wire the ultrasonic sensor', body: 'VCC to 5V, GND to GND, TRIG to A5 and ECHO to A4.' },
+      { title: 'Wire the servo', body: 'VCC to 5V, GND to GND and the control wire to pin 13.' },
+      { title: 'Upload', body: 'Install the Servo library if needed, then upload Recycle_Bot_code/Recycle_Bot_code.ino to the board.' },
+      { title: 'Test', body: 'Keep the lid clear, then move a hand within about 10 cm of the sensor — the lid should lift, and close again once you move away.' }
+    ],
+    codeBlocks: [],
+    commands: [],
+    diagramLabel: '// wiring: HC-SR04 TRIG→A5, ECHO→A4 · servo signal→pin 13 · both on 5V / GND',
+    results: 'The lid stays open while an object sits within roughly 10 cm of the sensor and closes once it clears. If the movement is unreliable, the usual cause is a weak USB port — the servo draws more current than some can supply, so a stable 5V source fixes it.',
+    downloads: [
+      { label: 'GitHub repository', url: 'https://github.com/tanyc-2003/UoSM-Robotics-Club-Smart-Dustbin-24-25' },
+      { label: 'Participant guide (PDF)', url: 'https://github.com/tanyc-2003/UoSM-Robotics-Club-Smart-Dustbin-24-25/blob/main/Participant%20Guide%20-%20Recycle%20Bot%20.pdf' }
     ]
   }
 ];
@@ -221,9 +477,11 @@ const RESUME = {
     }
   ],
   selected: [
+    { id: 'emgband', label: 'EMG Finger Gesture Wristband (final-year project)' },
     { id: 'quadruped', label: 'Quadruped Walking Robot' },
     { id: 'ivtracer', label: 'Low-Cost I–V Curve Tracer' },
-    { id: 'llmagent', label: 'Java → C++ Transpilation Agent' }
+    { id: 'llmagent', label: 'Java → C++ Transpilation Agent' },
+    { id: 'argus', label: 'ARGUS — Point-in-Time Market Data Platform' }
   ],
   skills: ['C / C++', 'Python', 'Arduino', 'Power electronics', 'LangGraph', 'CAD'],
   interests: 'Robotics · Embedded systems · Power electronics · AI & LLMs · Making & documentation',

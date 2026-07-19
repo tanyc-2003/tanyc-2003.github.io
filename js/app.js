@@ -100,7 +100,7 @@
           <a class="link-arrow" href="#/projects">See all →</a>
         </div>
         <div class="features">
-          ${PROJECTS.map(featureCard).join('')}
+          ${PROJECTS.filter((p) => p.featured).map(featureCard).join('')}
         </div>
       </section>
 
@@ -147,31 +147,16 @@
   /* Project detail ---------------------------------------------------------- */
 
   function viewDetail(p) {
-    const hasCode = p.codeBlocks.length > 0;
-    const hasCommands = p.commands.length > 0;
-    const hasDiagram = Boolean(p.diagramLabel);
-
-    const codeSection = !hasCode ? '' : `
-      <section>
-        <div class="block__head">
-          <span class="block__num">04</span>
-          <h2 class="block__title">Get it running</h2>
-        </div>
+    const codeBody = `
         <div class="code-blocks">
           ${p.codeBlocks.map((b) => `
             <div>
               <p class="code__label">${esc(b.label)}</p>
               <div class="code"><pre>${esc(b.code)}</pre></div>
             </div>`).join('')}
-        </div>
-      </section>`;
+        </div>`;
 
-    const commandSection = !hasCommands ? '' : `
-      <section>
-        <div class="block__head">
-          <span class="block__num">04</span>
-          <h2 class="block__title">Operating the robot</h2>
-        </div>
+    const commandBody = `
         <p class="commands__intro">Send each numeric command over Bluetooth serial, followed by a newline. The robot replies <code>ok</code> once processed — start with <code>0</code> to reach the rest pose.</p>
         <div class="commands">
           ${p.commands.map((c) => `
@@ -179,20 +164,83 @@
               <span class="command__key">${esc(c.cmd)}</span>
               <span class="command__desc">${esc(c.desc)}</span>
             </div>`).join('')}
-        </div>
-      </section>`;
+        </div>`;
 
-    const diagramSection = !hasDiagram ? '' : `
-      <section>
-        <div class="block__head">
-          <span class="block__num">05</span>
-          <h2 class="block__title">Wiring &amp; schematic</h2>
-        </div>
+    const diagramBody = `
         <div class="diagram">
           <div class="stripes"></div>
           <span class="diagram__label">${esc(p.diagramLabel)}</span>
-        </div>
-      </section>`;
+        </div>`;
+
+    const overviewBody = `
+        <div class="prose">
+          ${p.overviewParas.map((t) => `<p>${esc(t)}</p>`).join('')}
+        </div>`;
+
+    const prereqBody = `
+        <div class="prereq-grid">
+          ${p.prereqGroups.map((g) => `
+            <div class="prereq">
+              <p class="prereq__label">${esc(g.label)}</p>
+              <div class="prereq__items">
+                ${g.items.map((it) => `<div class="prereq__item"><span>${esc(it)}</span></div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>`;
+
+    const stepsBody = `
+        <div class="steps">
+          ${p.steps.map((s, i) => `
+            <div class="step">
+              <div class="step__num">${i + 1}</div>
+              <div class="step__text">
+                <h3>${esc(s.title)}</h3>
+                <p>${esc(s.body)}</p>
+              </div>
+            </div>`).join('')}
+        </div>`;
+
+    const resultsBody = `
+        <div class="results">
+          <div class="results__media" style="background:${p.grad};">
+            ${mediaFill(p)}
+            ${p.image ? '' : '<span class="results__hint">// drop: demo photo or video still</span>'}
+          </div>
+          <p>${esc(p.results)}</p>
+        </div>`;
+
+    const downloadsBody = `
+        <div class="downloads">
+          ${p.downloads.map((d) => `
+            <a class="download" href="${esc(d.url)}" target="_blank" rel="noopener">
+              <span>${esc(d.label)}</span>
+              <span class="download__arrow">↗</span>
+            </a>`).join('')}
+        </div>`;
+
+    // Sections are numbered sequentially from whatever this project actually
+    // has, so a project without code or commands doesn't leave a gap.
+    // `diagramTitle` lets a software project head its diagram "Architecture"
+    // rather than the hardware default.
+    const sections = [
+      { title: 'Overview', body: overviewBody },
+      { title: 'Setup &amp; prerequisites', body: prereqBody },
+      { title: 'Step-by-step build guide', body: stepsBody, tight: true },
+      p.codeBlocks.length && { title: 'Get it running', body: codeBody },
+      p.commands.length && { title: 'Operating the robot', body: commandBody },
+      p.diagramLabel && { title: esc(p.diagramTitle || 'Wiring & schematic'), body: diagramBody },
+      { title: 'Results &amp; demo', body: resultsBody },
+      { title: 'Downloads &amp; links', body: downloadsBody }
+    ].filter(Boolean);
+
+    const sectionsHtml = sections.map((s, i) => `
+          <section>
+            <div class="block__head${s.tight ? ' block__head--steps' : ''}">
+              <span class="block__num">${String(i + 1).padStart(2, '0')}</span>
+              <h2 class="block__title">${s.title}</h2>
+            </div>
+            ${s.body}
+          </section>`).join('');
 
     return `
       <article>
@@ -215,81 +263,7 @@
           </div>
         </div>
 
-        <div class="detail__body">
-          <section>
-            <div class="block__head">
-              <span class="block__num">01</span>
-              <h2 class="block__title">Overview</h2>
-            </div>
-            <div class="prose">
-              ${p.overviewParas.map((t) => `<p>${esc(t)}</p>`).join('')}
-            </div>
-          </section>
-
-          <section>
-            <div class="block__head">
-              <span class="block__num">02</span>
-              <h2 class="block__title">Setup &amp; prerequisites</h2>
-            </div>
-            <div class="prereq-grid">
-              ${p.prereqGroups.map((g) => `
-                <div class="prereq">
-                  <p class="prereq__label">${esc(g.label)}</p>
-                  <div class="prereq__items">
-                    ${g.items.map((it) => `<div class="prereq__item"><span>${esc(it)}</span></div>`).join('')}
-                  </div>
-                </div>`).join('')}
-            </div>
-          </section>
-
-          <section>
-            <div class="block__head block__head--steps">
-              <span class="block__num">03</span>
-              <h2 class="block__title">Step-by-step build guide</h2>
-            </div>
-            <div class="steps">
-              ${p.steps.map((s, i) => `
-                <div class="step">
-                  <div class="step__num">${i + 1}</div>
-                  <div>
-                    <h3>${esc(s.title)}</h3>
-                    <p>${esc(s.body)}</p>
-                  </div>
-                </div>`).join('')}
-            </div>
-          </section>
-
-          ${codeSection}
-          ${commandSection}
-          ${diagramSection}
-
-          <section>
-            <div class="block__head">
-              <span class="block__num">06</span>
-              <h2 class="block__title">Results &amp; demo</h2>
-            </div>
-            <div class="results">
-              <div class="results__media" style="background:${p.grad};">
-                ${mediaFill(p)}
-                ${p.image ? '' : '<span class="results__hint">// drop: demo photo or video still</span>'}
-              </div>
-              <p>${esc(p.results)}</p>
-            </div>
-          </section>
-
-          <section>
-            <div class="block__head">
-              <span class="block__num">07</span>
-              <h2 class="block__title">Downloads &amp; links</h2>
-            </div>
-            <div class="downloads">
-              ${p.downloads.map((d) => `
-                <a class="download" href="${esc(d.url)}" target="_blank" rel="noopener">
-                  <span>${esc(d.label)}</span>
-                  <span class="download__arrow">↗</span>
-                </a>`).join('')}
-            </div>
-          </section>
+        <div class="detail__body">${sectionsHtml}
         </div>
       </article>`;
   }
