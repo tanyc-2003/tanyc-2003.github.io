@@ -457,34 +457,131 @@ const ABOUT = {
 
 const RESUME = {
   name: 'Tan Yi Cherng',
-  role: 'Electrical & Electronic Engineering Student',
-  contact: 'tanyicherng99@gmail.com · github.com/tanyc-2003 · linkedin.com/in/yi-cherng-tan',
-  education: [
-    { school: 'University of Southampton', degree: 'BEng Electrical & Electronic Engineering', date: '20XX – 20XX' }
+  role: 'MEng Electrical & Electronic Engineering — First Class Honours',
+  summary: 'Electrical & Electronic Engineering graduate driven by a passion for technology, robotics and hands-on problem solving. Interested in embedded systems, AI and IoT, and in building things other people can rebuild.',
+  // Phone number deliberately omitted — this page is public, and the PDF
+  // below has had it removed too. Reach-outs come via email or LinkedIn.
+  contact: [
+    { label: 'Email', text: 'tanyicherng99@gmail.com', url: 'mailto:tanyicherng99@gmail.com' },
+    { label: 'LinkedIn', text: 'linkedin.com/in/yi-cherng-tan', url: 'https://www.linkedin.com/in/yi-cherng-tan/' },
+    { label: 'GitHub', text: 'github.com/tanyc-2003', url: 'https://github.com/tanyc-2003' }
   ],
-  experience: [
+
+  // The downloadable original, kept in the repo so the link never rots.
+  pdf: 'files/Tan-Yi-Cherng-Resume.pdf',
+
+  education: [
     {
-      role: 'Undergraduate Researcher',
-      date: '20XX',
-      org: 'University of Southampton · under Dr. Vun Jack',
-      desc: 'Designed and implemented a portable, low-cost, internet-enabled I–V curve tracer using a Ćuk-converter electronic load, with cloud data upload and a web dashboard.'
-    },
-    {
-      role: 'Member — UoSM Robotics Club',
-      date: '20XX',
-      org: null,
-      desc: 'Built a Bluetooth-controlled quadruped robot for club workshops — Arduino + PCA9685 servo control, HC-06 comms and a CAD-designed body.'
+      school: 'University of Southampton',
+      degree: 'MEng Electrical & Electronic Engineering',
+      note: 'Graduated with First Class Honours',
+      date: '2022 – 2026'
     }
   ],
+
+  experience: [
+    {
+      role: 'President, Robotics Club',
+      date: 'Apr 2024 – Apr 2025',
+      org: 'University of Southampton Malaysia',
+      bullets: [
+        'Led a club of 80 members and 8 committees, planning and running robotics workshops and events.',
+        'Organised eight events across the term; membership up 23% and revenue up 62%.',
+        'Won the 2024 Best Society Award.'
+      ]
+    },
+    {
+      role: 'Research Intern — I–V Curve Tracer',
+      date: 'Jun 2024 – Sep 2024',
+      org: 'University of Southampton Malaysia · under Dr. Chin Vun Jack',
+      bullets: [
+        'Designed an internet-enabled I–V curve tracer using a Ćuk converter for affordable curve tracing with remote monitoring.',
+        'Used a Raspberry Pi 4 for acquisition with a TFT display and web server, giving real-time access over Wi-Fi and the cloud.',
+        'Built the prototype for RM140 (≈£25), achieving 0.28 A RMSE and 6.5% RRMSE.',
+        'Submitted a conference paper to Gen-CITy 2024.'
+      ]
+    },
+    {
+      role: 'Software Development Intern',
+      date: 'Sep 2023 – Dec 2023',
+      org: 'Carbon GPT',
+      bullets: [
+        'Worked on an AI-driven, cloud-based carbon footprint management SaaS platform.',
+        'Collaborated with cross-functional teams to develop and ship key platform features.',
+        'Contributed to UI/UX improvements and systematic troubleshooting.'
+      ]
+    },
+    {
+      role: 'Research Intern — Electronic Stethoscope',
+      date: 'Jun 2023 – Aug 2023',
+      org: 'University of Southampton Malaysia · under Dr. Suan Hui Pu',
+      bullets: [
+        'Research into an electronic stethoscope built on low-cost MEMS microphones for ubiquitous respiratory sensing.',
+        'Developed the web application used for the research.',
+        'Contributed to a conference paper published at IEEE SENNANO 2023.'
+      ]
+    }
+  ],
+
+  // Academic and personal work beyond the full project write-ups.
+  // `id` links through to a project page where one exists.
+  highlights: [
+    {
+      title: 'Automated Popiah Skin Making Machine',
+      date: 'Aug 2024 – Sep 2024',
+      desc: 'Led electrical and electronics integration on a prototype machine, converting 240 V AC for eight heating elements with a regulated 12 V DC control rail, and an ESP32 + FreeRTOS control system for temperature and motor speed.'
+    },
+    {
+      title: 'Internet-Enabled Smart Meter Design',
+      date: 'Feb 2024 – May 2024',
+      id: 'smartmeter',
+      desc: 'Second-year team design project: a smart meter built from scratch with a waterproof 3D-printed housing, two power supply units, microgrid emulator interfacing, cloud data collection and a GPT-3.5 chatbot able to query the database.'
+    },
+    {
+      title: 'Integrated Circuit Design Project',
+      date: 'Oct 2023 – May 2024',
+      desc: 'Led a team of four through the design, layout and testing of an IC containing a ring oscillator, 9-bit sequence detector and asynchronous serial interface, built to TSMC design rules using S-Edit, L-Edit and ModelSim.'
+    },
+    {
+      title: 'Quadruped Spider Robot',
+      date: 'Jul 2023 – Aug 2023',
+      id: 'quadruped',
+      desc: 'Four-legged robot designed from scratch for a Robotics Club workshop — Cytron Maker Uno, eight servos over Bluetooth, custom SolidWorks parts 3D-printed and laser-cut on campus.'
+    },
+    {
+      title: 'Paediatric Malnutrition Early Detector (PaeMed)',
+      date: 'May 2023 – Jun 2023',
+      desc: 'Weight-sensing insoles and a height-measuring cap feeding an AI mobile app for child growth monitoring. First runner-up at INVENCMAX 3.0 and second runner-up at Smart City Hackathon 2023.'
+    },
+    {
+      title: 'RFID PCB Layout and Design',
+      date: 'Mar 2023 – May 2023',
+      desc: 'Two-layer mixed-signal PCB in Autodesk EAGLE — custom footprints, schematic capture, layout, fabrication and testing of the finished board.'
+    },
+    {
+      title: 'Flappy Bird Replica Game',
+      date: 'Sep 2022 – Oct 2022',
+      desc: 'A handheld console on an Ilmatto board (ATmega644p) with a TFT LCD and a single button, running a Flappy Bird replica written in pure C.'
+    }
+  ],
+
   selected: [
     { id: 'emgband', label: 'EMG Finger Gesture Wristband (final-year project)' },
-    { id: 'quadruped', label: 'Quadruped Walking Robot' },
     { id: 'ivtracer', label: 'Low-Cost I–V Curve Tracer' },
     { id: 'llmagent', label: 'Java → C++ Transpilation Agent' },
     { id: 'argus', label: 'ARGUS — Point-in-Time Market Data Platform' }
   ],
-  skills: ['C / C++', 'Python', 'Arduino', 'Power electronics', 'LangGraph', 'CAD'],
+
+  skillGroups: [
+    { label: 'Languages', items: ['C', 'C++', 'Python', 'JavaScript', 'HTML / CSS', 'SystemVerilog', 'MATLAB'] },
+    { label: 'Embedded & hardware', items: ['Arduino', 'Raspberry Pi', 'ESP32', 'FreeRTOS', 'FPGA', 'PCB design', 'Circuit design', 'Power electronics', 'Robotics'] },
+    { label: 'IC & VLSI', items: ['Digital IC design', 'VLSI', 'Layout design', 'Design for Test', 'Computer architecture'] },
+    { label: 'Software & cloud', items: ['Flask', 'Google Firebase', 'LLM / RAG pipelines', 'Embedded networking'] },
+    { label: 'Tools', items: ['SolidWorks CAD', 'MATLAB / Simulink', 'ModelSim', 'Quartus Prime', 'NI Multisim', 'SPICE', 'EAGLE CAD', 'S-Edit / L-Edit'] }
+  ],
+
   interests: 'Robotics · Embedded systems · Power electronics · AI & LLMs · Making & documentation',
+
   links: [
     { label: 'GitHub', url: 'https://github.com/tanyc-2003' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/yi-cherng-tan/' },
