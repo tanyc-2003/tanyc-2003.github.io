@@ -1138,10 +1138,15 @@ button { font-family: inherit; }
 .resume__role { font-size: 16px; color: var(--blue); font-weight: 500; margin: 6px 0 12px; }
 .resume__contact { font-family: var(--mono); font-size: 12.5px; color: var(--muted-3); margin: 0; }
 
+/* The main column carries far more than the sidebar, so it gets the width
+   rather than splitting evenly. Single column until there's room for two. */
 .resume__cols {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 44px;
+}
+@media (min-width: 820px) {
+  .resume__cols { grid-template-columns: 1.7fr 1fr; }
 }
 .resume__col { display: flex; flex-direction: column; gap: 30px; }
 .resume__col--side { gap: 28px; }
@@ -1187,6 +1192,54 @@ button { font-family: inherit; }
 .resume__interests { font-size: 14px; color: var(--ink-softer); line-height: 1.8; margin: 0; }
 
 .resume__links { display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+
+/* Print / download pair in the page header */
+.resume__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.resume__actions .btn--pill-soft { padding: 13px 26px; }
+
+/* Contact line: mono links separated by dots, wrapping on narrow screens */
+.resume__contact { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.resume__contact a { color: var(--muted-3); }
+.resume__contact a:hover { color: var(--blue); }
+.resume__sep { color: #c4c4c4; }
+
+.resume__summary {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-softer);
+  margin: 0 0 30px;
+  max-width: 70ch;
+}
+
+.resume__note { font-size: 13.5px; color: var(--blue); font-weight: 500; margin: 5px 0 0; }
+
+/* min-width:0 lets a long entry title shrink beside the nowrap date column. */
+.resume__row-title { min-width: 0; overflow-wrap: break-word; }
+
+.resume__inline-link { color: var(--ink); }
+.resume__inline-link:hover { color: var(--blue); }
+
+.resume__bullets {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.resume__bullets li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-softer);
+}
+.resume__bullets li::marker { color: var(--blue); }
+
+.resume__skill-groups { display: flex; flex-direction: column; gap: 18px; }
+.resume__skill-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted-2);
+  margin: 0 0 9px;
+}
 
 /* Contact ------------------------------------------------------------------ */
 

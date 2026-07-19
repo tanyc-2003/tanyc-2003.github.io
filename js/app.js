@@ -306,6 +306,11 @@
 
   function viewResume() {
     const r = RESUME;
+
+    const contactLine = r.contact
+      .map((c) => `<a href="${esc(c.url)}"${c.url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(c.text)}</a>`)
+      .join('<span class="resume__sep">·</span>');
+
     return `
       <section class="section--resume">
         <div class="resume__head no-print">
@@ -313,14 +318,21 @@
             <p class="eyebrow" style="margin-bottom:10px;">// résumé</p>
             <h1 class="page-title">Résumé</h1>
           </div>
-          <button class="btn--print" id="printResume">Download PDF ↓</button>
+          <div class="resume__actions">
+            <button class="btn--print" id="printResume">Print résumé ⎙</button>
+            <a class="btn--pill-soft" href="${esc(r.pdf)}" download>Download PDF ↓</a>
+          </div>
         </div>
+
         <div class="resume">
           <div class="resume__id">
             <h2 class="resume__name">${esc(r.name)}</h2>
             <p class="resume__role">${esc(r.role)}</p>
-            <p class="resume__contact">${esc(r.contact)}</p>
+            <p class="resume__contact">${contactLine}</p>
           </div>
+
+          <p class="resume__summary">${esc(r.summary)}</p>
+
           <div class="resume__cols">
             <div class="resume__col">
               <div>
@@ -330,12 +342,14 @@
                     <div>
                       <p class="resume__row-title">${esc(e.school)}</p>
                       <p class="resume__row-sub">${esc(e.degree)}</p>
+                      ${e.note ? `<p class="resume__note">${esc(e.note)}</p>` : ''}
                     </div>
                     <span class="resume__date">${esc(e.date)}</span>
                   </div>`).join('')}
               </div>
+
               <div>
-                <h3 class="resume__section-title">Experience &amp; research</h3>
+                <h3 class="resume__section-title">Experience</h3>
                 <div class="resume__entries">
                   ${r.experience.map((x) => `
                     <div>
@@ -344,27 +358,55 @@
                         <span class="resume__date">${esc(x.date)}</span>
                       </div>
                       ${x.org ? `<p class="resume__org">${esc(x.org)}</p>` : ''}
-                      <p class="resume__desc${x.org ? '' : ' resume__desc--tight'}">${esc(x.desc)}</p>
+                      <ul class="resume__bullets">
+                        ${x.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}
+                      </ul>
                     </div>`).join('')}
                 </div>
               </div>
+
               <div>
-                <h3 class="resume__section-title">Selected projects</h3>
+                <h3 class="resume__section-title">Project highlights</h3>
+                <div class="resume__entries">
+                  ${r.highlights.map((h) => `
+                    <div>
+                      <div class="resume__row">
+                        <p class="resume__row-title">${h.id
+                          ? `<a class="resume__inline-link" href="#/projects/${h.id}">${esc(h.title)}</a>`
+                          : esc(h.title)}</p>
+                        <span class="resume__date">${esc(h.date)}</span>
+                      </div>
+                      <p class="resume__desc resume__desc--tight">${esc(h.desc)}</p>
+                    </div>`).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="resume__col resume__col--side">
+              <div>
+                <h3 class="resume__section-title">Skills</h3>
+                <div class="resume__skill-groups">
+                  ${r.skillGroups.map((g) => `
+                    <div>
+                      <p class="resume__skill-label">${esc(g.label)}</p>
+                      <div class="tags">${tagList(g.items, 'resume__chip')}</div>
+                    </div>`).join('')}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="resume__section-title">Featured builds</h3>
                 <div class="resume__links-list">
                   ${r.selected.map((s) => `
                     <a class="resume__project-link no-print" href="#/projects/${s.id}">→ ${esc(s.label)}</a>`).join('')}
                 </div>
               </div>
-            </div>
-            <div class="resume__col resume__col--side">
-              <div>
-                <h3 class="resume__section-title">Skills</h3>
-                <div class="tags">${tagList(r.skills, 'resume__chip')}</div>
-              </div>
+
               <div>
                 <h3 class="resume__section-title">Interests</h3>
                 <p class="resume__interests">${esc(r.interests)}</p>
               </div>
+
               <div>
                 <h3 class="resume__section-title">Links</h3>
                 <div class="resume__links">
@@ -377,8 +419,6 @@
         </div>
       </section>`;
   }
-
-  /* Contact ----------------------------------------------------------------- */
 
   function viewContact() {
     return `
